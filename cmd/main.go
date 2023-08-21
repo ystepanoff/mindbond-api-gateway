@@ -3,6 +3,8 @@ package main
 import (
 	"log"
 
+	"flotta-home/mindbond/api-gateway/pkg/auth"
+	"flotta-home/mindbond/api-gateway/pkg/chat"
 	"flotta-home/mindbond/api-gateway/pkg/config"
 	"github.com/gin-gonic/gin"
 )
@@ -16,8 +18,8 @@ func main() {
 
 	r := gin.Default()
 
-	// authSvc := *auth.RegisterRoutes(r, &c)
-	// chat.RegisterRoutes(r, &c, &authSvc)
+	authService := *auth.RegisterRoutes(r, &c)
+	chat.RegisterRoutes(r, &c, &authService)
 
 	r.Run(c.Port)
 }
