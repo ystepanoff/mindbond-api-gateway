@@ -13,8 +13,6 @@ format:
 
 compile:
   stage: build
-  tags:
-      - mindbond
   script:
     - mkdir -p build
     - go build -o build ./...
