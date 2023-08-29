@@ -16,8 +16,9 @@ func RegisterRoutes(r *gin.Engine, c *config.Config, authSvc *auth.ServiceClient
 
 	routesGroup := r.Group("/chat")
 	routesGroup.Use(a.AuthRequired)
-	routesGroup.POST("/", svc.CreateChat)
-	routesGroup.GET("/:user1Id/:user2Id", svc.FindChat)
+	routesGroup.POST("/create", svc.CreateChat)
+	routesGroup.POST("/send", svc.AddMessage)
+	routesGroup.GET("/find/:user1Id/:user2Id", svc.FindChat)
 }
 
 func (svc *ServiceClient) CreateChat(ctx *gin.Context) {
@@ -26,4 +27,8 @@ func (svc *ServiceClient) CreateChat(ctx *gin.Context) {
 
 func (svc *ServiceClient) FindChat(ctx *gin.Context) {
 	routes.FindChat(ctx, svc.Client)
+}
+
+func (svc *ServiceClient) AddMessage(ctx *gin.Context) {
+	routes.AddMessage(ctx, svc.Client)
 }
