@@ -6,6 +6,7 @@ import (
 	"flotta-home/mindbond/api-gateway/pkg/auth"
 	"flotta-home/mindbond/api-gateway/pkg/chat"
 	"flotta-home/mindbond/api-gateway/pkg/config"
+
 	"github.com/gin-gonic/gin"
 )
 
