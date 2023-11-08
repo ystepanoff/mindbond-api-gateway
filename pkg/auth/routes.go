@@ -13,6 +13,7 @@ func RegisterRoutes(r *gin.Engine, c *config.Config) *ServiceClient {
 
 	routesGroup := r.Group("/auth")
 	routesGroup.POST("/register", svc.Register)
+	routesGroup.POST("/update", svc.Update)
 	routesGroup.POST("/login", svc.Login)
 	routesGroup.POST("/dry-login", svc.DryLogin)
 	routesGroup.POST("/logout", svc.Logout)
@@ -22,6 +23,10 @@ func RegisterRoutes(r *gin.Engine, c *config.Config) *ServiceClient {
 }
 
 func (svc *ServiceClient) Register(ctx *gin.Context) {
+	routes.Register(ctx, svc.Client)
+}
+
+func (svc *ServiceClient) Update(ctx *gin.Context) {
 	routes.Register(ctx, svc.Client)
 }
 
