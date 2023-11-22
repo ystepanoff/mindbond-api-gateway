@@ -27,7 +27,7 @@ func (svc *ServiceClient) Register(ctx *gin.Context) {
 }
 
 func (svc *ServiceClient) Update(ctx *gin.Context) {
-	routes.Register(ctx, svc.Client)
+	routes.Update(ctx, svc.Client)
 }
 
 func (svc *ServiceClient) Login(ctx *gin.Context) {
