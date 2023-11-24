@@ -21,7 +21,7 @@ func DryLogin(ctx *gin.Context, c pb.AuthServiceClient) {
 		return
 	}
 
-	res, err := c.Login(context.Background(), &pb.LoginRequest{
+	res, err := c.DryLogin(context.Background(), &pb.DryLoginRequest{
 		Email:    b.Email,
 		Password: b.Password,
 	})

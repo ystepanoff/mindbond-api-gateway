@@ -14,6 +14,7 @@ type UpdateRequestBody struct {
 	Password string `json:"password"`
 	Handle   string `json:"handle"`
 	Language string `json:"language"`
+	Token    string `json:"token"`
 }
 
 func Update(ctx *gin.Context, c pb.AuthServiceClient) {
@@ -30,6 +31,7 @@ func Update(ctx *gin.Context, c pb.AuthServiceClient) {
 		Password: body.Password,
 		Handle:   body.Handle,
 		Language: body.Language,
+		Token:    body.Token,
 	})
 
 	if err != nil {
