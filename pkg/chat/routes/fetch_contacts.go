@@ -8,22 +8,22 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type CreateChatRequestBody struct {
-	User1Id int64 `json:"user1Id"`
-	User2Id int64 `json:"user2Id"`
+type FetchContactsRequestBody struct {
+	UserId int64  `json:"userId"`
+	Token  string `json:"token"`
 }
 
-func CreateChat(ctx *gin.Context, c pb.ChatServiceClient) {
-	body := CreateChatRequestBody{}
+func FetchContacts(ctx *gin.Context, c pb.ChatServiceClient) {
+	body := FetchContactsRequestBody{}
 
 	if err := ctx.BindJSON(&body); err != nil {
 		ctx.AbortWithError(http.StatusBadRequest, err)
 		return
 	}
 
-	res, err := c.CreateChat(context.Background(), &pb.CreateChatRequest{
-		User1Id: body.User1Id,
-		User2Id: body.User2Id,
+	res, err := c.FetchContacts(context.Background(), &pb.FetchContactsRequest{
+		UserId: body.UserId,
+		Token:  body.Token,
 	})
 
 	if err != nil {
