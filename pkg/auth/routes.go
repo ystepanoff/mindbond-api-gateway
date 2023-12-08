@@ -18,6 +18,7 @@ func RegisterRoutes(r *gin.Engine, c *config.Config) *ServiceClient {
 	routesGroup.POST("/dry-login", svc.DryLogin)
 	routesGroup.POST("/logout", svc.Logout)
 	routesGroup.POST("/validate", svc.Validate)
+	routesGroup.POST("/lookup", svc.Lookup)
 
 	return svc
 }
@@ -44,4 +45,8 @@ func (svc *ServiceClient) Logout(ctx *gin.Context) {
 
 func (svc *ServiceClient) Validate(ctx *gin.Context) {
 	routes.Validate(ctx, svc.Client)
+}
+
+func (svc *ServiceClient) Lookup(ctx *gin.Context) {
+	routes.Lookup(ctx, svc.Client)
 }
