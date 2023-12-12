@@ -16,9 +16,9 @@ func RegisterRoutes(r *gin.Engine, c *config.Config, authSvc *auth.ServiceClient
 
 	routesGroup := r.Group("/chat")
 	routesGroup.Use(a.AuthRequired)
-	routesGroup.POST("/add", svc.AddContact)
-	routesGroup.POST("/remove", svc.RemoveContact)
-	routesGroup.POST("/fetch", svc.FetchContacts)
+	routesGroup.POST("/add_contact", svc.AddContact)
+	routesGroup.POST("/remove_contact", svc.RemoveContact)
+	routesGroup.POST("/fetch_contacts", svc.FetchContacts)
 	routesGroup.POST("/create", svc.CreateChat)
 	routesGroup.POST("/send", svc.AddMessage)
 	routesGroup.GET("/find/:user1Id/:user2Id", svc.FindChat)
