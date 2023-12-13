@@ -17,10 +17,24 @@ func main() {
 		log.Fatalln("Failed at config", err)
 	}
 
-	r := gin.Default()
+	router := gin.Default()
 
-	authService := *auth.RegisterRoutes(r, &c)
-	chat.RegisterRoutes(r, &c, &authService)
+	// CORS
+	router.Use(func(ctx *gin.Context) {
+		ctx.Header("Access-Control-Allow-Origin", "*")
+		ctx.Header("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, Authorization")
+		ctx.Header("Access-Control-Allow-Methods", "POST, OPTIONS")
 
-	r.Run(c.Port)
+		if ctx.Request.Method == "OPTIONS" {
+			ctx.AbortWithStatus(204)
+			return
+		}
+
+		ctx.Next()
+	})
+
+	authService := *auth.RegisterRoutes(router, &c)
+	chat.RegisterRoutes(router, &c, &authService)
+
+	router.Run(c.Port)
 }
