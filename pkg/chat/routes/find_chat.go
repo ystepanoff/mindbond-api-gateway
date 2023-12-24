@@ -2,20 +2,27 @@ package routes
 
 import (
 	"context"
-	"net/http"
-	"strconv"
-
 	"flotta-home/mindbond/api-gateway/pkg/chat/pb"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
+type FindChatRequestBody struct {
+	UserId    int64 `json:"userId"`
+	ContactId int64 `json:"contactId"`
+}
+
 func FindChat(ctx *gin.Context, c pb.ChatServiceClient) {
-	user1Id, _ := strconv.ParseInt(ctx.Param("user1Id"), 10, 32)
-	user2Id, _ := strconv.ParseInt(ctx.Param("user2Id"), 10, 32)
+	body := FindChatRequestBody{}
+
+	if err := ctx.BindJSON(&body); err != nil {
+		ctx.AbortWithError(http.StatusBadRequest, err)
+		return
+	}
 
 	res, err := c.FindChat(context.Background(), &pb.FindChatRequest{
-		User1Id: int64(user1Id),
-		User2Id: int64(user2Id),
+		User1Id: body.UserId,
+		User2Id: body.ContactId,
 	})
 
 	if err != nil {

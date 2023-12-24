@@ -21,7 +21,7 @@ func RegisterRoutes(r *gin.Engine, c *config.Config, authSvc *auth.ServiceClient
 	routesGroup.POST("/fetch_contacts", svc.FetchContacts)
 	routesGroup.POST("/create", svc.CreateChat)
 	routesGroup.POST("/send", svc.AddMessage)
-	routesGroup.GET("/find/:user1Id/:user2Id", svc.FindChat)
+	routesGroup.POST("/find", svc.FindChat)
 }
 
 func (svc *ServiceClient) AddContact(ctx *gin.Context) {
