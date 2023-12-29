@@ -9,11 +9,9 @@ import (
 )
 
 type AddMessageRequestBody struct {
-	UserFromId       int64  `json:"userFromId"`
-	UserFromLanguage string `json:"userFromLanguage"`
-	UserToId         int64  `json:"userToId"`
-	UserToLanguage   string `json:"userToLanguage"`
-	Message          string `json:"message"`
+	UserFromId int64  `json:"userFromId"`
+	UserToId   int64  `json:"userToId"`
+	Message    string `json:"message"`
 }
 
 func AddMessage(ctx *gin.Context, c pb.ChatServiceClient) {
@@ -25,11 +23,9 @@ func AddMessage(ctx *gin.Context, c pb.ChatServiceClient) {
 	}
 
 	res, err := c.AddMessage(context.Background(), &pb.AddMessageRequest{
-		UserFromId:       body.UserFromId,
-		UserFromLanguage: body.UserFromLanguage,
-		UserToId:         body.UserToId,
-		UserToLanguage:   body.UserToLanguage,
-		Message:          body.Message,
+		UserFromId: body.UserFromId,
+		UserToId:   body.UserToId,
+		Message:    body.Message,
 	})
 
 	if err != nil {
