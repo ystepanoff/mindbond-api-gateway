@@ -5,12 +5,12 @@ import (
 	"net/http"
 
 	"flotta-home/mindbond/api-gateway/pkg/chat/pb"
-	"github.com/gin-gonic/gin"
 )
 
 type CreateChatRequestBody struct {
-	User1Id int64 `json:"user1Id"`
-	User2Id int64 `json:"user2Id"`
+	User1Id int64  `json:"user1Id"`
+	User2Id int64  `json:"user2Id"`
+	Token   string `json:"token"`
 }
 
 func CreateChat(ctx *gin.Context, c pb.ChatServiceClient) {
@@ -24,6 +24,7 @@ func CreateChat(ctx *gin.Context, c pb.ChatServiceClient) {
 	res, err := c.CreateChat(context.Background(), &pb.CreateChatRequest{
 		User1Id: body.User1Id,
 		User2Id: body.User2Id,
+		Token:   body.Token,
 	})
 
 	if err != nil {

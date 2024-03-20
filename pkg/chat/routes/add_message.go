@@ -5,13 +5,13 @@ import (
 	"net/http"
 
 	"flotta-home/mindbond/api-gateway/pkg/chat/pb"
-	"github.com/gin-gonic/gin"
 )
 
 type AddMessageRequestBody struct {
 	UserFromId int64  `json:"userFromId"`
 	UserToId   int64  `json:"userToId"`
 	Message    string `json:"message"`
+	Token      string `json:"token"`
 }
 
 func AddMessage(ctx *gin.Context, c pb.ChatServiceClient) {
@@ -26,6 +26,7 @@ func AddMessage(ctx *gin.Context, c pb.ChatServiceClient) {
 		UserFromId: body.UserFromId,
 		UserToId:   body.UserToId,
 		Message:    body.Message,
+		Token:      body.Token,
 	})
 
 	if err != nil {
