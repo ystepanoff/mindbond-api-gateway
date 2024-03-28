@@ -8,21 +8,21 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type FindChatRequestBody struct {
+type FetchMessagesRequestBody struct {
 	UserId    int64  `json:"userId"`
 	ContactId int64  `json:"contactId"`
 	Token     string `json:"token"`
 }
 
-func FindChat(ctx *gin.Context, c pb.ChatServiceClient) {
-	body := FindChatRequestBody{}
+func FetchMessages(ctx *gin.Context, c pb.ChatServiceClient) {
+	body := FetchMessagesRequestBody{}
 
 	if err := ctx.BindJSON(&body); err != nil {
 		ctx.AbortWithError(http.StatusBadRequest, err)
 		return
 	}
 
-	res, err := c.FindChat(context.Background(), &pb.FindChatRequest{
+	res, err := c.(context.Background(), &pb.FindChatRequest{
 		User1Id: body.UserId,
 		User2Id: body.ContactId,
 		Token:   body.Token,

@@ -22,6 +22,8 @@ func RegisterRoutes(r *gin.Engine, c *config.Config, authSvc *auth.ServiceClient
 	routesGroup.POST("/create", svc.CreateChat)
 	routesGroup.POST("/send", svc.AddMessage)
 	routesGroup.POST("/find", svc.FindChat)
+    
+    routesGroup.POST("/fetch_messages", svc.FetchMessages)
 }
 
 func (svc *ServiceClient) AddContact(ctx *gin.Context) {
@@ -46,4 +48,8 @@ func (svc *ServiceClient) FindChat(ctx *gin.Context) {
 
 func (svc *ServiceClient) AddMessage(ctx *gin.Context) {
 	routes.AddMessage(ctx, svc.Client)
+}
+
+func (svc *ServiceClient) FetchMessages(ctx *gin.Context) {
+    routes.FetchMessages(ctx, svc.Client)
 }

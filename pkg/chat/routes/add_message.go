@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"flotta-home/mindbond/api-gateway/pkg/chat/pb"
+	"github.com/gin-gonic/gin"
 )
 
 type AddMessageRequestBody struct {
