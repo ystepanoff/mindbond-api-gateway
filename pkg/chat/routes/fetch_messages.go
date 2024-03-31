@@ -11,6 +11,7 @@ import (
 type FetchMessagesRequestBody struct {
 	UserId    int64  `json:"userId"`
 	ContactId int64  `json:"contactId"`
+	Count     int64  `json:"count"`
 	Token     string `json:"token"`
 }
 
@@ -22,10 +23,11 @@ func FetchMessages(ctx *gin.Context, c pb.ChatServiceClient) {
 		return
 	}
 
-	res, err := c.(context.Background(), &pb.FindChatRequest{
-		User1Id: body.UserId,
-		User2Id: body.ContactId,
-		Token:   body.Token,
+	res, err := c.FetchMessages(context.Background(), &pb.FetchMessagesRequest{
+		UserFromId: body.UserId,
+		UserToId:   body.ContactId,
+		Count:      body.Count,
+		Token:      body.Token,
 	})
 
 	if err != nil {
